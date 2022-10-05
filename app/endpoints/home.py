@@ -1,5 +1,5 @@
 from email import message
-from endpoints import Endpoint
+from app.endpoints import Endpoint
 
 endpoint = Endpoint(prefix='')
 
