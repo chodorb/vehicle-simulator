@@ -1,0 +1,1 @@
+FastAPI project, simulating vehicle traffic for IOT related purposes
