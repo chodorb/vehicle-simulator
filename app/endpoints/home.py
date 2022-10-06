@@ -1,4 +1,3 @@
-from email import message
 from app.endpoints import Endpoint
 
 endpoint = Endpoint(prefix='')

@@ -1,2 +1,7 @@
 fastapi==0.85.0
 uvicorn==0.18.3
+requestes==0.0.1
+sqlalchemy
+celery
+python-dotenv
+psycopg2-binary

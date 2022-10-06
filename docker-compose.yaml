@@ -4,9 +4,47 @@ version: '3.8'
 
 services:
   web:
-    build: .
+    
+    build: 
+      dockerfile: "./docker/Dockerfile"
     command: uvicorn app.main:app --host 0.0.0.0
     volumes:
       - .:/app
     ports:
       - 8008:8000
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+    ports:
+      - 5050:80
+    depends_on:
+      - db
+
+  redis:
+    image: redis:7-alpine
+
+  celery_worker:
+    build:
+      context: .
+      dockerfile: "./docker/Dockerfile"
+    command: celery -A app.celery_worker.celery
+    volumes: 
+      - .:/app
+    depends_on:
+      - web
+      - redis
+  
