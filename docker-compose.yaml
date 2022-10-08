@@ -4,6 +4,7 @@ version: '3.8'
 
 services:
   web:
+    container_name: fastapi
     build:
       context: . 
       dockerfile: "./docker/Dockerfile"
@@ -16,6 +17,7 @@ services:
       - db
 
   db:
+    container_name: postgresdb
     image: postgres:14-alpine
     ports:
       - 5432:5432
@@ -25,6 +27,7 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
 
   pgadmin:
+    container_name: pgadmin
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
@@ -35,9 +38,11 @@ services:
       - db
 
   redis:
+    container_name: redis
     image: redis:7-alpine
 
   celery_worker:
+    container_name: celery_worker
     build:
       context: .
       dockerfile: "./docker/Dockerfile"
