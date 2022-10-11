@@ -5,6 +5,7 @@ version: '3.8'
 services:
   web:
     container_name: fastapi
+    platform: linux/amd64
     build:
       context: . 
       dockerfile: "./docker/Dockerfile"
@@ -43,6 +44,7 @@ services:
 
   celery_worker:
     container_name: celery_worker
+    platform: linux/amd64
     build:
       context: .
       dockerfile: "./docker/Dockerfile"

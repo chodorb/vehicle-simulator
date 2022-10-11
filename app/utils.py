@@ -5,7 +5,7 @@ import os
 import dotenv
 import requests
 
-
+dotenv.load_dotenv('.env')
 
 def simulate_vehicle(origin,destination,time_multiplier):
     google_cloud_key=os.environ.get('GOOGLE_CLOUD_KEY')
@@ -28,4 +28,3 @@ def simulate_vehicle(origin,destination,time_multiplier):
             Current vehicle speed is {random.randint(50,80)}.{random.randint(0,99)}      
             """)
         time.sleep(float(duration)/time_multiplier*6)
-        
